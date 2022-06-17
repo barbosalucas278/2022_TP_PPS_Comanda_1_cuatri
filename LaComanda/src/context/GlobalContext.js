@@ -10,7 +10,7 @@ const GlobalContext = createContext({
   },
   setClient: () => {},
   clients: [],
-  setClients: () => {}
+  setClients: () => [{}]
 });
 
 export default GlobalContext;

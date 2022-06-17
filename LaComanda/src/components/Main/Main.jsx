@@ -16,6 +16,7 @@ import ClientsOnHold from '../../pages/ClientsOnHold/ClientsOnHold';
 import ClientHome from '../../pages/ClientHome/ClientHome';
 import TableMenu from '../../pages/TableMenu/TableMenu';
 import WaiterChat from '../../pages/WaiterChat/WaiterChat';
+import WaiterOrderView from '../../pages/WaiterOrderView/WaiterOrderView';
 
 const Stack = createNativeStackNavigator();
 
@@ -202,6 +203,26 @@ export default function Main() {
             }}
             name='WaiterChat'
             component={WaiterChat}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderProfileIcon(),
+              headerShown: true,
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Pedidos'
+            }}
+            name='WaiterOrderView'
+            component={WaiterOrderView}
           />
         </Stack.Navigator>
       </NavigationContainer>

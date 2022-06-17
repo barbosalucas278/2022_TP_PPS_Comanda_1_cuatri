@@ -57,12 +57,21 @@ export const getAllAprrovedUsers = async ( onResult, onError ) => {
 export const getAllMetres = async ( onResult, onError ) => {
   await firestore.collection( 'users' ).where( 'rol', '==', 'Metre' ).where( 'approved', '==', true ).onSnapshot( onResult, onError );
 };
+
 export const getAllWaiter = async ( onResult, onError ) => {
   await firestore.collection( 'users' ).where( 'rol', '==', 'Mozo' ).where( 'approved', '==', true ).onSnapshot( onResult, onError );
 };
 
+export const getAllCooksAndBartenders = async ( onResult, onError ) => {
+  await firestore.collection( 'users' ).where( 'rol', 'in', ['Bartender', 'Cocinero']).where( 'approved', '==', true ).onSnapshot( onResult, onError );
+};
+
 export const getAllClients = async ( onResult, onError ) => {
   await firestore.collection( 'clients' ).onSnapshot( onResult, onError );
+};
+
+export const getAllClientsToOrder = async ( onResult, onError ) => {
+  await firestore.collection( 'clients' ).where( 'orderState', 'in', ['4', '5']).onSnapshot( onResult, onError );
 };
 
 export const getClientByEmail = async ( email, onResult, onError ) => {

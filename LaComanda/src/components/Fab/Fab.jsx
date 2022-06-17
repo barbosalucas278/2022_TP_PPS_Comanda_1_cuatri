@@ -126,6 +126,23 @@ export default function Fab( props ) {
             >
               <ChatIcon name='chatbubbles-outline' size={40} color='white' />
             </ActionButton.Item>
+            <ActionButton.Item
+              spaceBetween={2}
+              buttonColor={theme.colors.icons}
+              useNativeFeedback
+              title='Pedidos'
+              textStyle={{
+                fontSize: 14,
+                width: 105,
+                height: 100
+              }}
+              style={{ zIndex: 9999 }}
+              onPress={() => {
+                navigation.navigate( 'WaiterOrderView' );
+              }}
+            >
+              <ChatIcon name='chatbubbles-outline' size={40} color='white' />
+            </ActionButton.Item>
           </ActionButton>
         );
       case 'Cocinero':
