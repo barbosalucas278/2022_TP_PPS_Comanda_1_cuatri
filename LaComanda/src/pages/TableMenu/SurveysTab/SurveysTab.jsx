@@ -7,6 +7,7 @@ import GlobalContext from '../../../context/GlobalContext';
 import CreateSurvey from './CreateSurvey/CreateSurvey';
 import { saveItemInCollection, updateItem } from '../../../services/FirestoreServices';
 import { saveImageInStorage } from '../../../services/StorageServices';
+import ListOfSurveys from './ListOfSurveys/ListOfSurveys';
 
 export default function SurveysTab() {
   const { client } = useContext( GlobalContext );
@@ -64,7 +65,7 @@ export default function SurveysTab() {
                 surveyDone
                   ? (
                     <View style={styles.container}>
-                      <Text>Muestro la encuesta</Text>
+                      <ListOfSurveys />
                     </View>
                   ) : (
                     <View style={styles.container}>
@@ -75,7 +76,6 @@ export default function SurveysTab() {
             </View>
           )
       }
-
     </View>
   );
 }

@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.issos.LaComanda"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -35,7 +36,7 @@
         "expo-notifications",
         {
           "icon": "./assets/icono.png",
-          "color": "#ffffff"          
+          "color": "#ffffff"
         }
       ]
     ]
