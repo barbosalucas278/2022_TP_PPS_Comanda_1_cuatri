@@ -12,8 +12,9 @@ import theme from '../../config/theme';
 
 export default function Approvals() {
   const [clients, setClients] = useState([]);
+
   useEffect(() => {
-    app.firestore().collection( 'users' ).where( 'rol', '==', 'Cliente' ).where( 'approved', '==', false )
+    app.firestore().collection( 'users' ).where( 'rol', '==', 'Cliente' ).where( 'ownerDecided', '==', false )
       .onSnapshot(( querySnapshots ) => {
         const users = querySnapshots.docs.map(( doc ) => ({ data: doc.data(), id: doc.id }));
 
@@ -23,12 +24,13 @@ export default function Approvals() {
       });
   }, []);
 
-  const handleApproval = ( id, email ) => {
-    updateItem( 'users', id, { approved: true })
+  const handleApproval = ( id, email, isApproved ) => {
+    updateItem( 'users', id, { approved: isApproved, ownerDecided: true })
       .then(() => {
         const emailTemplate = {
           from: 'approvals',
-          email
+          email,
+          isApproved
         };
         saveItemInCollection( 'mails', email, emailTemplate );
       })
@@ -60,10 +62,14 @@ function ClientCard( props ) {
           resizeMode='cover'
         />
       </View>
-      <View>
-        <TouchableOpacity style={styles.button} onPress={() => handleApproval( id, data.email )}>
+      <View style={{ flexDirection: 'row' }}>
+        <TouchableOpacity style={styles.button} onPress={() => handleApproval( id, data.email, true )}>
           <Text style={styles.text}>Aprobar</Text>
-          <MaterialCommunityIcons name='check-decagram' size={40} color={theme.colors.primary} />
+          <MaterialCommunityIcons name='account-plus' size={35} color={theme.colors.primary} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => handleApproval( id, data.email, false )}>
+          <Text style={styles.text}>No aprobar</Text>
+          <MaterialCommunityIcons name='account-minus' size={35} color={theme.colors.icons} />
         </TouchableOpacity>
       </View>
       <Text style={styles.textName}>{`${data.name} ${data.surname}`}</Text>
