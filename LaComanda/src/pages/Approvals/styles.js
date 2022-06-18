@@ -38,6 +38,8 @@ export const styles = StyleSheet.create({
     height: Dimensions.get( 'screen' ).height * 0.191
   },
   button: {
+    marginLeft: 15,
+    marginRight: 15,
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center'
