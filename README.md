@@ -23,6 +23,7 @@ Mínimo: 2 integrantes
 - Vista de encuestas [Completada]
 - Vista de juegos [En proceso]
 - Funcionalidad "Pedir la cuenta" [En proceso]
+- Toasts
 
 ### Beta Guido Clas
 - Creacion de Splash screen [Completada]
@@ -36,3 +37,4 @@ Mínimo: 2 integrantes
 - Vista de confirmación y entrega de pedido [Completada]
 - Vista de pedidos pendientes para Cocinero/Bartender [En proceso]
 - Funcionalidad "Confirmar el pago" por mozo [En proceso]
+- Sonidos
