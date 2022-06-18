@@ -5,7 +5,6 @@ import {
 import React, { useEffect, useState } from 'react';
 // import React Native chart Kit for different kind of Chart
 import {
-  LineChart,
   BarChart,
   PieChart,
   ProgressChart
@@ -13,34 +12,8 @@ import {
 import styles from './styles';
 import { getAllCollection } from '../../../../services/FirestoreServices';
 import { ConstantsSystem } from '../../../../config/constantsSystem';
-
-function MyLineChart( props ) {
-  const { dataChart, title } = props;
-  return (
-    <>
-      <Text style={styles.charTitle}>{title}</Text>
-      <LineChart
-        data={dataChart}
-        width={Dimensions.get( 'window' ).width - 16}
-        height={220}
-        chartConfig={{
-          backgroundColor: '#1cc910',
-          backgroundGradientFrom: '#eff3ff',
-          backgroundGradientTo: '#efefef',
-          decimalPlaces: 0,
-          color: ( opacity = 1 ) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16
-          }
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16
-        }}
-      />
-    </>
-  );
-}
+import theme from '../../../../config/theme';
+import { LineChartCustom } from '../../../../components/Charts/LineChartCustom';
 
 function MyProgressChart( props ) {
   const { dataChart, title } = props;
@@ -56,7 +29,7 @@ function MyProgressChart( props ) {
           backgroundGradientFrom: '#eff3ff',
           backgroundGradientTo: '#efefef',
           decimalPlaces: 2,
-          color: ( opacity = 1 ) => `rgba(0, 0, 0, ${opacity})`,
+          color: ( opacity = 1 ) => `rgba(220, 0, 0, ${opacity})`,
           style: {
             borderRadius: 16
           }
@@ -71,28 +44,21 @@ function MyProgressChart( props ) {
 }
 
 function MyBarChart( props ) {
-  const { dataChart } = props;
+  const { dataChart, title } = props;
   return (
     <>
-      <Text style={styles.header}>Bar Chart</Text>
+      <Text style={styles.charTitle}>{title}</Text>
       <BarChart
-        data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-          datasets: [
-            {
-              data: [20, 45, 28, 80, 99, 43]
-            }
-          ]
-        }}
+        data={dataChart}
         width={Dimensions.get( 'window' ).width - 16}
         height={220}
-        yAxisLabel='Rs'
+        fromZero
         chartConfig={{
           backgroundColor: '#1cc910',
           backgroundGradientFrom: '#eff3ff',
           backgroundGradientTo: '#efefef',
-          decimalPlaces: 2,
-          color: ( opacity = 1 ) => `rgba(0, 0, 0, ${opacity})`,
+          decimalPlaces: 0,
+          color: ( opacity = 1 ) => `rgba(255, 0, 0, ${opacity})`,
           style: {
             borderRadius: 16
           }
@@ -106,41 +72,13 @@ function MyBarChart( props ) {
   );
 }
 
-function MyPieChart() {
+function MyPieChart( props ) {
+  const { dataChart, title } = props;
   return (
     <>
-      <Text style={styles.header}>Pie Chart</Text>
+      <Text style={styles.charTitle}>{title}</Text>
       <PieChart
-        data={[
-          {
-            name: 'Seoul',
-            population: 21500000,
-            color: 'rgba(131, 167, 234, 1)',
-            legendFontColor: '#7F7F7F',
-            legendFontSize: 15
-          },
-          {
-            name: 'Toronto',
-            population: 2800000,
-            color: '#F00',
-            legendFontColor: '#7F7F7F',
-            legendFontSize: 15
-          },
-          {
-            name: 'New York',
-            population: 8538000,
-            color: '#ffffff',
-            legendFontColor: '#7F7F7F',
-            legendFontSize: 15
-          },
-          {
-            name: 'Moscow',
-            population: 11920000,
-            color: 'rgb(0, 0, 255)',
-            legendFontColor: '#7F7F7F',
-            legendFontSize: 15
-          }
-        ]}
+        data={dataChart}
         width={Dimensions.get( 'window' ).width - 16}
         height={220}
         chartConfig={{
@@ -175,19 +113,66 @@ export default function ListOfSurveys() {
     }]
   });
   const [progressChartData, setProgressChartData] = useState({ labels: ConstantsSystem.Survey.RADIO_OPTIONS, data: [0, 0, 0] });
-  const [barChartData, setBarChartData] = useState({});
-  const [pieChartData, setPieChartData] = useState({});
+  const [barChartData, setBarChartData] = useState({
+    labels: ConstantsSystem.Survey.SELECT_OPTIONS.map(( o ) => o.label ),
+    datasets: [{
+      data: [0, 0, 0]
+    }]
+  });
+  const [pieChartData, setPieChartData] = useState([
+    {
+      name: ConstantsSystem.Survey.CHECKS_OPTIONS[0],
+      population: 0,
+      color: theme.PieChartColors[0],
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
+    },
+    {
+      name: ConstantsSystem.Survey.CHECKS_OPTIONS[1],
+      population: 0,
+      color: theme.PieChartColors[1],
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
+    },
+    {
+      name: ConstantsSystem.Survey.CHECKS_OPTIONS[2],
+      population: 0,
+      color: theme.PieChartColors[2],
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
+    },
+    {
+      name: ConstantsSystem.Survey.CHECKS_OPTIONS[3],
+      population: 0,
+      color: theme.PieChartColors[3],
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
+    },
+    {
+      name: ConstantsSystem.Survey.CHECKS_OPTIONS[4],
+      population: 0,
+      color: theme.PieChartColors[4],
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
+    },
+    {
+      name: ConstantsSystem.Survey.CHECKS_OPTIONS[5],
+      population: 0,
+      color: theme.PieChartColors[5],
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
+    }
+  ]);
   useEffect(() => {
     getAllCollection( 'surveys', ( data ) => {
       const response = data.docs.map(( doc ) => doc.data());
-      setTimeout(() => {
-        setSurveys( response );
-        updateChartsData();
-      }, 3000 );
+      setSurveys( response );
+      updateChartsData();
     }, ( error ) => console.log( error ));
-  }, []);
+  }, [surveys.length]);
   const updateChartsData = () => {
     if ( surveys.length > 0 ) {
+      // Line chart config
       const stayInThePlaceValues = surveys.map(( survey ) => survey.stayInThePlace ) ?? [];
       const stayInThePlaceChart = [];
       ConstantsSystem.Survey.RANGE_OPTIONS.forEach(( range, index ) => {
@@ -201,7 +186,7 @@ export default function ListOfSurveys() {
           strokedWidth: 2
         }]
       });
-
+      // Progress chart config
       const finishDishValues = surveys.map(( survey ) => survey.finishDish ) ?? [];
       const finishDish = [];
       ConstantsSystem.Survey.RADIO_OPTIONS.forEach(( radio ) => {
@@ -209,9 +194,74 @@ export default function ListOfSurveys() {
         const promedio = count / surveys.length;
         finishDish.push( promedio );
       });
-      setProgressChartData( finishDish );
-      setBarChartData( surveys.map(( survey ) => survey ));
-      setPieChartData( surveys.map(( survey ) => survey ));
+      setProgressChartData({ labels: ConstantsSystem.Survey.RADIO_OPTIONS, data: finishDish });
+      // Bar chart config
+      const paymentMethodValues = surveys.map(( survey ) => survey.paymentMethod.value );
+      const paymentMethodChart = [];
+      ConstantsSystem.Survey.SELECT_OPTIONS.forEach(( check ) => {
+        const count = paymentMethodValues.filter(( value ) => value === check.value ).length;
+        paymentMethodChart.push( count );
+      });
+      setBarChartData({
+        labels: ConstantsSystem.Survey.SELECT_OPTIONS.map(( o ) => o.label ),
+        datasets: [{
+          data: paymentMethodChart
+        }]
+      });
+      // Pie chart config
+      const whereDidYouMeetUsValues = surveys.map(( survey ) => survey.whereDidYouMeetUs );
+      const whereDidYouMeetUsChart = [
+        {
+          name: ConstantsSystem.Survey.CHECKS_OPTIONS[0],
+          population: 0,
+          color: theme.PieChartColors[0],
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 15
+        },
+        {
+          name: ConstantsSystem.Survey.CHECKS_OPTIONS[1],
+          population: 0,
+          color: theme.PieChartColors[1],
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 15
+        },
+        {
+          name: ConstantsSystem.Survey.CHECKS_OPTIONS[2],
+          population: 0,
+          color: theme.PieChartColors[2],
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 15
+        },
+        {
+          name: ConstantsSystem.Survey.CHECKS_OPTIONS[3],
+          population: 0,
+          color: theme.PieChartColors[3],
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 15
+        },
+        {
+          name: ConstantsSystem.Survey.CHECKS_OPTIONS[4],
+          population: 0,
+          color: theme.PieChartColors[4],
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 15
+        },
+        {
+          name: ConstantsSystem.Survey.CHECKS_OPTIONS[5],
+          population: 0,
+          color: theme.PieChartColors[5],
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 15
+        }
+      ];
+      ConstantsSystem.Survey.CHECKS_OPTIONS.forEach(( check, index ) => {
+        whereDidYouMeetUsValues.forEach(( userOptions ) => {
+          if ( userOptions.includes( check )) {
+            whereDidYouMeetUsChart[index].population += 1;
+          }
+        });
+      });
+      setPieChartData( whereDidYouMeetUsChart );
     }
   };
   return (
@@ -224,13 +274,13 @@ export default function ListOfSurveys() {
             && (
               <View>
                 {/* Example of LineChart*/}
-                <MyLineChart dataChart={lineChartData ?? []} title='Estadía en el lugar' />
+                <LineChartCustom dataChart={lineChartData ?? []} title='Estadía en el lugar' />
                 {/* Example of Progress Chart*/}
                 <MyProgressChart dataChart={progressChartData ?? []} title='Terminaron su plato' />
                 {/* Example of Bar Chart*/}
-                <MyBarChart dataChart={barChartData} />
+                <MyBarChart dataChart={barChartData} title='¿Cómo prefieren pagar los clientes?' />
                 {/* Example of Pie Chart*/}
-                <MyPieChart data={pieChartData} />
+                <MyPieChart dataChart={pieChartData} title='¿Dónde nos conocieorn los clientes?' />
               </View>
             )
           }

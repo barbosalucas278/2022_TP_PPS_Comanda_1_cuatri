@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   charTitle: {
-    textAlign: 'center'
-
+    textAlign: 'center',
+    fontSize: 19
   }
 });
 export default styles;

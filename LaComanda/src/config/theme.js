@@ -23,6 +23,7 @@ const theme = {
   fontWeights: {
     normal: '400',
     bold: '700'
-  }
+  },
+  PieChartColors: ['blue', 'red', 'green', 'yellow', 'orange', 'purple']
 };
 export default theme;
