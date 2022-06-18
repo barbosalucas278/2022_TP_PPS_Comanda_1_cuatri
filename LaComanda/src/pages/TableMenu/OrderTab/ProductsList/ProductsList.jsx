@@ -83,7 +83,7 @@ export default function ProductsList({ navigation }) {
     }).then(() => {
       getAllWaiter(( data ) => {
         const response = data.docs.map(( doc ) => doc.data());
-        const usersToken = response.map(( u ) => u.pushToken );
+        const usersToken = response.map(( u ) => u.pushToken ).filter(( us ) => us !== undefined );
         sendPushNotification( usersToken, 'Nuevo Pedido', 'Ha ingresado un nuevo pedido para confirmar' );
       }, ( err ) => { console.log( err ); });
       navigation.navigate( 'WaitingOrder' );

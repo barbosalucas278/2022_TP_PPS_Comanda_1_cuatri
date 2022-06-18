@@ -129,7 +129,8 @@ export default function Home() {
         setClient( newClient );
         getAllMetres(( data ) => {
           const response = data.docs.map(( doc ) => doc.data());
-          const usersToken = response.map(( u ) => u.pushToken );
+          const usersToken = response.map(( u ) => u.pushToken ).filter(( us ) => us !== undefined );
+          console.log( usersToken );
           sendPushNotification( usersToken, 'Nuevo Ingreso', 'Ha ingresado un cliente a la lista de espera' );
         }, ( err ) => { console.log( err ); });
       });

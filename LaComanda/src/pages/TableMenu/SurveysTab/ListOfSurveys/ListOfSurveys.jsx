@@ -16,7 +16,6 @@ import { ConstantsSystem } from '../../../../config/constantsSystem';
 
 function MyLineChart( props ) {
   const { dataChart, title } = props;
-  console.log( dataChart );
   return (
     <>
       <Text style={styles.charTitle}>{title}</Text>
@@ -71,7 +70,8 @@ function MyProgressChart( props ) {
   );
 }
 
-function MyBarChart() {
+function MyBarChart( props ) {
+  const { dataChart } = props;
   return (
     <>
       <Text style={styles.header}>Bar Chart</Text>
@@ -174,18 +174,19 @@ export default function ListOfSurveys() {
       strokedWidth: 2
     }]
   });
-  const [progressChartData, setProgressChartData] = useState([0, 0, 0]);
+  const [progressChartData, setProgressChartData] = useState({ labels: ConstantsSystem.Survey.RADIO_OPTIONS, data: [0, 0, 0] });
   const [barChartData, setBarChartData] = useState({});
   const [pieChartData, setPieChartData] = useState({});
   useEffect(() => {
     getAllCollection( 'surveys', ( data ) => {
       const response = data.docs.map(( doc ) => doc.data());
-      setSurveys( response );
-      updateChartsData();
+      setTimeout(() => {
+        setSurveys( response );
+        updateChartsData();
+      }, 3000 );
     }, ( error ) => console.log( error ));
   }, []);
   const updateChartsData = () => {
-    console.log( surveys );
     if ( surveys.length > 0 ) {
       const stayInThePlaceValues = surveys.map(( survey ) => survey.stayInThePlace ) ?? [];
       const stayInThePlaceChart = [];
@@ -193,7 +194,6 @@ export default function ListOfSurveys() {
         const count = stayInThePlaceValues.filter(( value ) => value === index ).length;
         stayInThePlaceChart.push( count );
       });
-      console.log( stayInThePlaceChart );
       setLineChartData({
         labels: ConstantsSystem.Survey.RANGE_OPTIONS,
         datasets: [{
@@ -228,10 +228,9 @@ export default function ListOfSurveys() {
                 {/* Example of Progress Chart*/}
                 <MyProgressChart dataChart={progressChartData ?? []} title='Terminaron su plato' />
                 {/* Example of Bar Chart*/}
-                {/* <MyBarChart data={barChartData} /> */}
-                {/* <MyBarChart data={barChartData} /> */}
+                <MyBarChart dataChart={barChartData} />
                 {/* Example of Pie Chart*/}
-                {/* <MyPieChart data={pieChartData} /> */}
+                <MyPieChart data={pieChartData} />
               </View>
             )
           }

@@ -73,11 +73,11 @@ export default function Chat() {
       user
     });
 
-    if ( userRole === 'Cliente' ) {
+    if ( userRole === 'Cliente' || userRole === 'Invitado' ) {
       getAllWaiter(( data ) => {
         const response = data.docs.map(( doc ) => doc.data());
         console.log( response );
-        const usersToken = response.map(( u ) => u.pushToken );
+        const usersToken = response.map(( u ) => u.pushToken ).filter(( us ) => us !== undefined );
         sendPushNotification( usersToken, 'Nueva consulta', 'Un cliente realizó una consulta al chat' );
       }, ( err ) => { console.log( err ); });
     }

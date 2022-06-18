@@ -101,7 +101,7 @@ function ClientCard( props ) {
       updateItem( 'clients', data.email, { orderState: '5' });
       getAllCooksAndBartenders(( dataFB ) => {
         const response = dataFB.docs.map(( doc ) => doc.data());
-        const usersToken = response.map(( u ) => u.pushToken );
+        const usersToken = response.map(( u ) => u.pushToken ).filter(( us ) => us !== undefined );
         sendPushNotification( usersToken, 'Nuevo Pedido', 'Hay un pedido pendiente' );
       }, ( err ) => { console.log( err ); });
       sendPushNotification();

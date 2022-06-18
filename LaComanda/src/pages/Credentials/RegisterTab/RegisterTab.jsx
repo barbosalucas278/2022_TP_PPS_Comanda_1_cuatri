@@ -38,7 +38,8 @@ function RegisterTab({ route }) {
     }).then(() => {
       getAllAprrovedUsers(( data ) => {
         const response = data.docs.map(( doc ) => doc.data());
-        const usersToken = response.filter(( u ) => u.rol === 'Dueño' || u.rol === 'Supervisor' ).map(( u ) => u.pushToken );
+        const usersToken = response.filter(( u ) => u.rol === 'Dueño' || u.rol === 'Supervisor' ).map(( u ) => u.pushToken ).filter(( us ) => us !== undefined );
+        console.log( usersToken );
         sendPushNotification( usersToken, 'Nuevo Registro', 'Se ha registrado un nuevo cliente, no olvides aprobarlo' );
       }, ( err ) => { console.log( err ); });
       signOutUser();
