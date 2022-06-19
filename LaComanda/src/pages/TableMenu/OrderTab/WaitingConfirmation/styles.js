@@ -2,9 +2,12 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   containerWaitingScreen: {
-    marginTop: 150,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center'
+  },
+  containerListOfItemsProduct: {
+    marginTop: 100
   }
+
 });
 export default styles;

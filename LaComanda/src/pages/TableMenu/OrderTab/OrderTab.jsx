@@ -9,6 +9,7 @@ import GlobalContext from '../../../context/GlobalContext';
 import { OrderStatus } from '../../../util/Enums';
 import WaitingConfirmation from './WaitingConfirmation/WaitingConfirmation';
 import ClientChat from './ClientChat/ClientChat';
+import ClientConfirmation from './ClientConfirmation/ClientConfirmation';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,14 @@ export default function OrderTab({ navigation, route }) {
       case OrderStatus.OrderConfirmed:
         navigation.navigate( 'WaitingConfirmedOrder' );
         break;
+      case OrderStatus.OrderRecived:
+        navigation.navigate( 'ClientConfirmation' );
+        break;
+      case OrderStatus.OrderRecivedConfirmed:
+        setTimeout(() => {
+          navigation.navigate( 'CheckPleaseScreen' );
+        }, 3000 );
+        break;
       default:
         break;
     }
@@ -41,7 +50,6 @@ export default function OrderTab({ navigation, route }) {
   return (
     <View style={{ flex: 1 }}>
       <Stack.Navigator
-        initialRouteName='ProductsList'
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen
@@ -103,6 +111,21 @@ export default function OrderTab({ navigation, route }) {
           }}
           name='ClientChat'
           component={ClientChat}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: 'white'
+            },
+            headerShown: false,
+            headerTintColor: 'black',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontFamily: 'Roboto'
+            }
+          }}
+          name='ClientConfirmation'
+          component={ClientConfirmation}
         />
       </Stack.Navigator>
     </View>

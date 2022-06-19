@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Toast from 'react-native-toast-message';
 import Credentials from '../../pages/Credentials/Credentials';
 import Home from '../../pages/Home/Home';
 import theme from '../../config/theme';
@@ -17,8 +18,10 @@ import ClientHome from '../../pages/ClientHome/ClientHome';
 import TableMenu from '../../pages/TableMenu/TableMenu';
 import WaiterChat from '../../pages/WaiterChat/WaiterChat';
 import WaiterOrderView from '../../pages/WaiterOrderView/WaiterOrderView';
+import { createConfiguracionToast } from '../../config/configToast';
 
 const Stack = createNativeStackNavigator();
+const configToast = createConfiguracionToast();
 
 export default function Main() {
   const handleLogout = () => {
@@ -226,6 +229,7 @@ export default function Main() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast config={configToast} />
     </View>
   );
 }

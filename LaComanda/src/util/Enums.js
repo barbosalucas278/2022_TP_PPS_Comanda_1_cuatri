@@ -13,5 +13,12 @@ export const OrderStatus = {
   ScannedAssignedTable: '3',
   OrderSended: '4',
   OrderConfirmed: '5',
+  OrderRecived: '6',
+  OrderRecivedConfirmed: '7',
   None: '0'
+};
+export const ProductStatus = {
+  Pendding: '1',
+  InProgress: '2',
+  Done: '3'
 };

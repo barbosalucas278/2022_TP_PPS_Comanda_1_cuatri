@@ -1,6 +1,7 @@
 import { View, Text, ActivityIndicator } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import styles from './styles.js';
 import StandbyScreen from '../../components/StandbyScreen/StandbyScreen.jsx';
 import GlobalContext from '../../context/GlobalContext.js';
@@ -30,12 +31,21 @@ export default function ClientHome() {
     setSpinner( true );
     if ( _scanResult === client.assignedTable ) {
       updateItem( 'clients', client.email, { orderState: OrderStatus.ScannedAssignedTable });
+      Toast.show({
+        type: 'success',
+        text1: 'Mesa tomada correctamente',
+        position: 'bottom'
+      });
       navigation.navigate( 'TableMenu' );
     } else {
-      console.log( 'No es la mesa asignada' );
       setTimeout(() => {
+        Toast.show({
+          type: 'error',
+          text1: 'No es la mesa asignada',
+          position: 'bottom'
+        });
         setSpinner( false );
-      }, 1000 ); // TODO: aca se deberia mostrar un mensaje de error
+      }, 1000 );
     }
   };
   return (

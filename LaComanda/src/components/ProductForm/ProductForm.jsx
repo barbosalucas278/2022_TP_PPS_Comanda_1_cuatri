@@ -14,6 +14,7 @@ import React, { useState, useEffect } from 'react';
 import Styles from './Styles';
 import userImgDefault from '../../../assets/iconoCamara.png';
 import CamaraView from '../CameraView/CamaraView';
+import { ProductStatus } from '../../util/Enums';
 
 export default function ProductForm( props ) {
   const { onSubmit } = props;
@@ -270,7 +271,8 @@ export default function ProductForm( props ) {
         description,
         firstPhoto,
         secondPhoto,
-        thirdPhoto
+        thirdPhoto,
+        productState: ProductStatus.Pendding
       };
       onSubmit( product );
     }

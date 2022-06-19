@@ -78,6 +78,8 @@ export default function Home() {
       case OrderStatus.ScannedAssignedTable:
       case OrderStatus.OrderSended:
       case OrderStatus.OrderConfirmed:
+      case OrderStatus.OrderRecived:
+      case OrderStatus.OrderRecivedConfirmed:
         navigation.navigate( 'TableMenu' );
         break;
       default:

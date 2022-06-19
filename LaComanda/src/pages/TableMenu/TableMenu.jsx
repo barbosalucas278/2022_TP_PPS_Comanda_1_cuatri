@@ -10,6 +10,7 @@ import SurveysTab from './SurveysTab/SurveysTab';
 import GlobalContext from '../../context/GlobalContext';
 import WaitingConfirmation from './OrderTab/WaitingConfirmation/WaitingConfirmation';
 import WaitingConfirmedOrder from './OrderTab/WaitingConfirmedOrder/WaitingConfirmedOrder';
+import ClientConfirmation from './OrderTab/ClientConfirmation/ClientConfirmation';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,6 +50,9 @@ export default function TableMenu() {
         return WaitingConfirmation;
       case OrderStatus.OrderConfirmed:
         return WaitingConfirmedOrder;
+      case OrderStatus.OrderRecived:
+      case OrderStatus.OrderRecivedConfirmed:
+        return ClientConfirmation;
       default:
         return OrderTab;
     }

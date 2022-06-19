@@ -9,7 +9,7 @@ export default function StandbyScreen( props ) {
   return (
     < >
       <Image
-        style={{ width: 290, height: 290 }}
+        style={{ width: 210, height: 210 }}
         source={gifClock}
       />
       <Text style={styles.textWaiting}>{text}</Text>
