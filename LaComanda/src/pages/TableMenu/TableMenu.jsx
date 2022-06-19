@@ -11,6 +11,8 @@ import GlobalContext from '../../context/GlobalContext';
 import WaitingConfirmation from './OrderTab/WaitingConfirmation/WaitingConfirmation';
 import WaitingConfirmedOrder from './OrderTab/WaitingConfirmedOrder/WaitingConfirmedOrder';
 import ClientConfirmation from './OrderTab/ClientConfirmation/ClientConfirmation';
+import ClientEating from './OrderTab/ClientEating/ClientEating';
+import WaitingCheck from './OrderTab/WaitingCheck/WaitingCheck';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,6 +55,10 @@ export default function TableMenu() {
       case OrderStatus.OrderRecived:
       case OrderStatus.OrderRecivedConfirmed:
         return ClientConfirmation;
+      case OrderStatus.ClientEating:
+        return ClientEating;
+      case OrderStatus.WaitingCheck:
+        return WaitingCheck;
       default:
         return OrderTab;
     }

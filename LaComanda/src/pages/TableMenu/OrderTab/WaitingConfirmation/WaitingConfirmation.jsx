@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import ItemProductStatus from '../../../../components/ItemProductStatus/ItemProductStatus';
 import StandbyScreen from '../../../../components/StandbyScreen/StandbyScreen';
 import GlobalContext from '../../../../context/GlobalContext';
-import { ProductStatus } from '../../../../util/Enums';
 import styles from './styles';
 
 export default function WaitingConfirmation() {

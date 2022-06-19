@@ -79,7 +79,9 @@ export default function ProductsList({ navigation }) {
     setSpinner( true );
     updateItem( 'clients', client.email, {
       orderState: OrderStatus.OrderSended,
-      order: { totalEstimatedTime, total, products: newOrder }
+      order: {
+        totalEstimatedTime, total, products: newOrder, discount: 0
+      }
     }).then(() => {
       getAllWaiter(( data ) => {
         const response = data.docs.map(( doc ) => doc.data());

@@ -10,6 +10,8 @@ import { OrderStatus } from '../../../util/Enums';
 import WaitingConfirmation from './WaitingConfirmation/WaitingConfirmation';
 import ClientChat from './ClientChat/ClientChat';
 import ClientConfirmation from './ClientConfirmation/ClientConfirmation';
+import ClientEating from './ClientEating/ClientEating';
+import WaitingCheck from './WaitingCheck/WaitingCheck';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,8 +41,14 @@ export default function OrderTab({ navigation, route }) {
         break;
       case OrderStatus.OrderRecivedConfirmed:
         setTimeout(() => {
-          navigation.navigate( 'CheckPleaseScreen' );
+          navigation.navigate( 'ClientEating' );
         }, 3000 );
+        break;
+      case OrderStatus.ClientEating:
+        navigation.navigate( 'ClientEating' );
+        break;
+      case OrderStatus.WaitingCheck:
+        navigation.navigate( 'WaitingCheck' );
         break;
       default:
         break;
@@ -126,6 +134,36 @@ export default function OrderTab({ navigation, route }) {
           }}
           name='ClientConfirmation'
           component={ClientConfirmation}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: 'white'
+            },
+            headerShown: false,
+            headerTintColor: 'black',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontFamily: 'Roboto'
+            }
+          }}
+          name='ClientEating'
+          component={ClientEating}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: 'white'
+            },
+            headerShown: false,
+            headerTintColor: 'black',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontFamily: 'Roboto'
+            }
+          }}
+          name='WaitingCheck'
+          component={WaitingCheck}
         />
       </Stack.Navigator>
     </View>

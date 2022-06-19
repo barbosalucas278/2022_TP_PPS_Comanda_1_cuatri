@@ -15,6 +15,9 @@ export default function ClientConfirmation() {
   const { client } = useContext( GlobalContext );
   const confirmOrderRecived = () => {
     updateItem( 'clients', client.email, { orderState: OrderStatus.OrderRecivedConfirmed });
+    setTimeout(() => {
+      updateItem( 'clients', client.email, { orderState: OrderStatus.ClientEating });
+    }, 3000 );
   };
   return (
     <View style={{ height: Dimensions.get( 'screen' ).height * 0.8, alignItems: 'center' }}>

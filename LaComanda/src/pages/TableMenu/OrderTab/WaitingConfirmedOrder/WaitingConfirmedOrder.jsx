@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import ItemProductStatus from '../../../../components/ItemProductStatus/ItemProductStatus';
 import StandbyScreen from '../../../../components/StandbyScreen/StandbyScreen';

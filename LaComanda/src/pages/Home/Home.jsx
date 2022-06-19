@@ -80,6 +80,9 @@ export default function Home() {
       case OrderStatus.OrderConfirmed:
       case OrderStatus.OrderRecived:
       case OrderStatus.OrderRecivedConfirmed:
+      case OrderStatus.CheckWaiting:
+      case OrderStatus.ClientEating:
+      case OrderStatus.WaitingCheck:
         navigation.navigate( 'TableMenu' );
         break;
       default:
