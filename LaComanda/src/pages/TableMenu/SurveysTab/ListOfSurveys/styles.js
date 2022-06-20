@@ -1,7 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    height: Dimensions.get( 'screen' ).height * 1.7,
+    padding: 0
+  },
   containerSpinner: {
     height: Dimensions.get( 'screen' ).height * 0.8,
     width: Dimensions.get( 'screen' ).width,

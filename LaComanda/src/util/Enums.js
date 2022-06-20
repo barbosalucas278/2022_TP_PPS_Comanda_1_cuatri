@@ -17,6 +17,8 @@ export const OrderStatus = {
   OrderRecivedConfirmed: '7',
   ClientEating: '8',
   WaitingCheck: '9',
+  AlreadyPaid: '10',
+  FinishedProcess: '11',
   None: '0'
 };
 export const ProductStatus = {

@@ -61,7 +61,7 @@ export default function Home() {
   useEffect(() => {
     getUserByEmail( 'clients', user.email, ( data ) => {
       const response = data.docs.map(( doc ) => doc.data())[0];
-      if ( response && response.email === user.email ) {
+      if ( response && response.email === user.email && response.orderState !== OrderStatus.FinishedProcess ) {
         setBtnScannerText( 'Volver al Menú' );
       } else {
         setBtnScannerText( 'Ingresar' );
@@ -83,6 +83,7 @@ export default function Home() {
       case OrderStatus.CheckWaiting:
       case OrderStatus.ClientEating:
       case OrderStatus.WaitingCheck:
+      case OrderStatus.AlreadyPaid:
         navigation.navigate( 'TableMenu' );
         break;
       default:

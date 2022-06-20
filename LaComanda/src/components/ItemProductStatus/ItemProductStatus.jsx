@@ -32,9 +32,9 @@ export default function ItemProductStatus( props ) {
   };
   return (
     <View style={[styles.containerItemProduct, withPrice && { marginBottom: 0 }]}>
-      <View style={{
-        flexDirection: 'row', justifyContent: 'flex-start', borderRightWidth: 3, width: Dimensions.get( 'screen' ).width * 0.8
-      }}
+      <View style={[{
+        flexDirection: 'row', justifyContent: 'flex-start'
+      }, withPrice && { borderRightWidth: 3, width: Dimensions.get( 'screen' ).width * 0.8 }]}
       >
         <View style={styles.quantity}>
           <Text>{product.quantity}</Text>

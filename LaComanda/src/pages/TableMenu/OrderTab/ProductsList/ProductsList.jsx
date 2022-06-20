@@ -80,7 +80,7 @@ export default function ProductsList({ navigation }) {
     updateItem( 'clients', client.email, {
       orderState: OrderStatus.OrderSended,
       order: {
-        totalEstimatedTime, total, products: newOrder, discount: 0
+        totalEstimatedTime, total, products: newOrder, discount: 0, tip: 0
       }
     }).then(() => {
       getAllWaiter(( data ) => {

@@ -9,6 +9,7 @@ import { OrderStatus } from '../../util/Enums.js';
 import Scanner from '../../components/Scanner/Scanner.js';
 import theme from '../../config/theme.js';
 import { updateItem } from '../../services/FirestoreServices.js';
+import ListOfSurveys from '../TableMenu/SurveysTab/ListOfSurveys/ListOfSurveys.jsx';
 
 export default function ClientHome() {
   const [waiting, setWaiting] = useState( null );
@@ -51,7 +52,12 @@ export default function ClientHome() {
   return (
     <View>
       { waiting
-        ? <View style={styles.containerWaitingScreen}><StandbyScreen text='Se encuentra en lista de espera para ingresar' /></View> : (
+        ? (
+          <View style={styles.containerWaitingScreen}>
+            <StandbyScreen text='Se encuentra en lista de espera para ingresar' />
+            <ListOfSurveys />
+          </View>
+        ) : (
           <View style={styles.containerScannerTable}>
             <Text style={styles.textScanTable}>Debe Scannear la mesa que se le fue asignada</Text>
             {

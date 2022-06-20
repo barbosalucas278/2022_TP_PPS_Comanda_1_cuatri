@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View } from 'react-native';
 import theme from '../../config/theme';
 import { OrderStatus, UserTypes } from '../../util/Enums';
 import GameTab from './GameTab/GameTab';
@@ -58,9 +59,10 @@ export default function TableMenu() {
       case OrderStatus.ClientEating:
         return ClientEating;
       case OrderStatus.WaitingCheck:
+      case OrderStatus.AlreadyPaid:
         return WaitingCheck;
       default:
-        return OrderTab;
+        return <View />;
     }
   };
   return (

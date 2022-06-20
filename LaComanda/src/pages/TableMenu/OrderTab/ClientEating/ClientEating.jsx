@@ -24,7 +24,7 @@ export default function ClientEating() {
   }, [client.order.discount]);
 
   const getTheCheck = () => {
-    updateItem( 'clients', client.email, { totalToPaid: totalNow, orderState: OrderStatus.WaitingCheck });
+    updateItem( 'clients', client.email, { totalToPaid: totalNow, tip: propina, orderState: OrderStatus.WaitingCheck });
   };
   const handleScannerResult = ( scannerResult ) => {
     if ( scannerResult === client.assignedTable ) {
