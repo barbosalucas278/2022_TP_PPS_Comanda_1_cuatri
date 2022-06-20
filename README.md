@@ -22,8 +22,8 @@ Mínimo: 2 integrantes
 - Chat ida y vuelta entre Mozo/Cliente [Completada]
 - Vista de encuestas [Completada]
 - Vista de juegos [En proceso]
-- Funcionalidad "Pedir la cuenta" [En proceso]
-- Toasts
+- Funcionalidad "Pedir la cuenta" [Completada]
+- Toasts [Completada]
 
 ### Beta Guido Clas
 - Creacion de Splash screen [Completada]
