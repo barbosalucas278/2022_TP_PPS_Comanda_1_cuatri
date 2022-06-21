@@ -421,6 +421,25 @@ export default function Main() {
             name='WaitingCheck'
             component={WaitingCheck}
           />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderProfileIcon(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Cuenta'
+            }}
+            name='CookBarmanOrderView'
+            component={CookBarmanOrderView}
+          />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast config={configToast} />

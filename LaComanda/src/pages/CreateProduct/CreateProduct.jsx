@@ -47,7 +47,7 @@ export default function CreateProduct() {
                   price: newProduct.price,
                   photos: uris,
                   sector,
-                  productState: '1'
+                  productState: newProduct.productState
                 };
                 saveItemInCollection( 'products', newProduct.name, newProduct ).then(() => {
                   navigation.navigate( 'Home' );

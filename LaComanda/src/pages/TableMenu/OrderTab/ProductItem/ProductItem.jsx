@@ -11,6 +11,7 @@ export default function ProductItem( props ) {
   } = props;
   const [quantity, setQuantity] = useState( '0' );
   const onAdd = () => {
+    console.log( product );
     addProduct( product );
     setQuantity( quantityInOrder( product ));
   };
