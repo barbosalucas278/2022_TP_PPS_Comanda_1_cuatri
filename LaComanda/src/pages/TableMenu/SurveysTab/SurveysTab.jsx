@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './syles';
 import Spinner from '../../../components/Spinner/Spinner';

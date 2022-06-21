@@ -59,7 +59,13 @@ export default function ClientHome() {
           </View>
         ) : (
           <View style={styles.containerScannerTable}>
-            <Text style={styles.textScanTable}>Debe Scannear la mesa que se le fue asignada</Text>
+            <Text style={styles.textScanTable}>
+              Debe Scannear la mesa que se le fue asignada
+              {' '}
+              &quot;
+              {client.assignedTable}
+              &quot;
+            </Text>
             {
               spinner ? (
                 <View style={styles.containerSpinner}>

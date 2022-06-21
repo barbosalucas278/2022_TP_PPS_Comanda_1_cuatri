@@ -16,12 +16,12 @@ import { saveItemInCollection, updateItem } from '../../../../services/Firestore
 export default function WaitingCheck() {
   const { client } = useContext( GlobalContext );
 
-  const downloadTicket = () => {
-    // updateItem( 'clients', client.email, { orderState: OrderStatus.OrderRecivedConfirmed });
-    // setTimeout(() => {
-    //   updateItem( 'clients', client.email, { orderState: OrderStatus.ClientEating });
-    // }, 3000 );
-  };
+  // const downloadTicket = () => {
+  //   updateItem( 'clients', client.email, { orderState: OrderStatus.OrderRecivedConfirmed });
+  //   setTimeout(() => {
+  //     updateItem( 'clients', client.email, { orderState: OrderStatus.ClientEating });
+  //   }, 3000 );
+  // };
   const goHome = () => {
     updateItem( 'clients', client.email, { orderState: OrderStatus.FinishedProcess });
     saveItemInCollection( 'ordersHistory', uuid.v4().toString(), client );
@@ -76,12 +76,12 @@ export default function WaitingCheck() {
       {client.orderState === OrderStatus.AlreadyPaid
       && (
         <>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.button}
             onPress={() => downloadTicket()}
           >
             <Text style={styles.textButton}>Descargar Comprobante</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => goHome()}

@@ -19,6 +19,15 @@ import TableMenu from '../../pages/TableMenu/TableMenu';
 import WaiterChat from '../../pages/WaiterChat/WaiterChat';
 import WaiterOrderView from '../../pages/WaiterOrderView/WaiterOrderView';
 import { createConfiguracionToast } from '../../config/configToast';
+import GameTab from '../../pages/TableMenu/GameTab/GameTab';
+import SurveysTab from '../../pages/TableMenu/SurveysTab/SurveysTab';
+import ProductsList from '../../pages/TableMenu/OrderTab/ProductsList/ProductsList';
+import WaitingConfirmedOrder from '../../pages/TableMenu/OrderTab/WaitingConfirmedOrder/WaitingConfirmedOrder';
+import WaitingConfirmation from '../../pages/TableMenu/OrderTab/WaitingConfirmation/WaitingConfirmation';
+import ClientChat from '../../pages/TableMenu/OrderTab/ClientChat/ClientChat';
+import ClientConfirmation from '../../pages/TableMenu/OrderTab/ClientConfirmation/ClientConfirmation';
+import ClientEating from '../../pages/TableMenu/OrderTab/ClientEating/ClientEating';
+import WaitingCheck from '../../pages/TableMenu/OrderTab/WaitingCheck/WaitingCheck';
 
 const Stack = createNativeStackNavigator();
 const configToast = createConfiguracionToast();
@@ -30,6 +39,9 @@ export default function Main() {
   };
   const handleProfile = () => {
     navigate( 'Home', { screen: 'Home' });
+  };
+  const handleTableMenu = () => {
+    navigate( 'TableMenu' );
   };
 
   function renderHeaderLogoutIcon() {
@@ -43,6 +55,13 @@ export default function Main() {
     return (
       <TouchableOpacity onPress={handleProfile}>
         <Icon name='user-o' size={36} color='white' />
+      </TouchableOpacity>
+    );
+  }
+  function renderHeaderTableMenu() {
+    return (
+      <TouchableOpacity onPress={handleTableMenu}>
+        <Icon name='angle-left' size={36} color='white' />
       </TouchableOpacity>
     );
   }
@@ -226,6 +245,180 @@ export default function Main() {
             }}
             name='WaiterOrderView'
             component={WaiterOrderView}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerShown: true,
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Juegos'
+            }}
+            name='GameTab'
+            component={GameTab}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerShown: true,
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Encuestas'
+            }}
+            name='SurveyTab'
+            component={SurveysTab}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerShown: true,
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Lista de productos'
+            }}
+            name='ProductsList'
+            component={ProductsList}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Pedido'
+            }}
+            name='WaitingConfirmedOrder'
+            component={WaitingConfirmedOrder}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Pedido'
+            }}
+            name='WaitingConfirmation'
+            component={WaitingConfirmation}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Chat'
+            }}
+            name='ClientChat'
+            component={ClientChat}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Confirmación'
+            }}
+            name='ClientConfirmation'
+            component={ClientConfirmation}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Pedido'
+            }}
+            name='ClientEating'
+            component={ClientEating}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Cuenta'
+            }}
+            name='WaitingCheck'
+            component={WaitingCheck}
           />
         </Stack.Navigator>
       </NavigationContainer>

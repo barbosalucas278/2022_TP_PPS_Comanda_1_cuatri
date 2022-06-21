@@ -1,130 +1,157 @@
-import React, { useContext } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+/* eslint-disable react/prop-types */
+import React, { useContext, useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View } from 'react-native';
-import theme from '../../config/theme';
-import { OrderStatus, UserTypes } from '../../util/Enums';
-import GameTab from './GameTab/GameTab';
-import OrderTab from './OrderTab/OrderTab';
-import SurveysTab from './SurveysTab/SurveysTab';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import ChatIcon from 'react-native-vector-icons/Ionicons';
+import { OrderStatus } from '../../util/Enums';
 import GlobalContext from '../../context/GlobalContext';
-import WaitingConfirmation from './OrderTab/WaitingConfirmation/WaitingConfirmation';
-import WaitingConfirmedOrder from './OrderTab/WaitingConfirmedOrder/WaitingConfirmedOrder';
-import ClientConfirmation from './OrderTab/ClientConfirmation/ClientConfirmation';
-import ClientEating from './OrderTab/ClientEating/ClientEating';
-import WaitingCheck from './OrderTab/WaitingCheck/WaitingCheck';
+import styles from './styles';
+import Scanner from '../../components/Scanner/Scanner';
+import { navigate } from '../../config/RootNavigation';
 
-const Tab = createBottomTabNavigator();
-
-function renderTabBarIcon( route, size ) {
-  let iconName;
-  let iconColor;
-
-  switch ( route.name ) {
-    case 'Juegos':
-      iconColor = theme.colors.icons;
-      iconName = 'gamepad';
-      break;
-    case 'Pedido':
-      iconColor = theme.colors.icons;
-      iconName = 'concierge-bell';
-      break;
-    case 'Encuestas':
-      iconColor = theme.colors.icons;
-      iconName = 'message-star';
-      break;
-    default:
-      break;
-  }
-
-  return ( iconName === 'message-star'
-    ? <IconMaterial name={iconName} size={size} color={iconColor} />
-    : <Icon name={iconName} size={size} color={iconColor} />
-  );
-}
 export default function TableMenu() {
   const { client } = useContext( GlobalContext );
-  const renderTabPedidos = () => {
+  const [scanner, setScanner] = useState( false );
+  const [active, setActive] = useState( '' );
+  useEffect(() => {
     switch ( client.orderState ) {
       case OrderStatus.ScannedAssignedTable:
-        return OrderTab;
+        navigate( 'ProductsList' );
+        break;
       case OrderStatus.OrderSended:
-        return WaitingConfirmation;
+        navigate( 'WaitingConfirmation' );
+        break;
       case OrderStatus.OrderConfirmed:
-        return WaitingConfirmedOrder;
+        navigate( 'WaitingConfirmedOrder' );
+        break;
       case OrderStatus.OrderRecived:
+        navigate( 'ClientConfirmation' );
+        break;
       case OrderStatus.OrderRecivedConfirmed:
-        return ClientConfirmation;
+        setTimeout(() => {
+          navigate( 'ClientEating' );
+        }, 3000 );
+        break;
       case OrderStatus.ClientEating:
-        return ClientEating;
+        navigate( 'ClientEating' );
+        break;
       case OrderStatus.WaitingCheck:
-      case OrderStatus.AlreadyPaid:
-        return WaitingCheck;
+        navigate( 'WaitingCheck' );
+        break;
+      case OrderStatus.FinishedProcess:
+        navigate( 'Home' );
+        break;
       default:
-        return <View />;
+        break;
+    }
+  }, [client.orderState]);
+
+  const onGameScreen = () => {
+    setScanner( true );
+    setActive( 'GameTab' );
+  };
+  const onSurveyScreen = () => {
+    setScanner( true );
+    setActive( 'SurveyTab' );
+  };
+  const onOrderScreen = () => {
+    setScanner( true );
+    setActive( 'OrderTab' );
+  };
+  const handleScannerResult = ( _scanResult ) => {
+    if ( _scanResult === client.assignedTable ) {
+      console.log( 'Scanner result: ', _scanResult );
+      setScanner( false );
+      if ( active === 'OrderTab' ) {
+        switch ( client.orderState ) {
+          case OrderStatus.ScannedAssignedTable:
+            navigate( 'ProductsList' );
+            break;
+          case OrderStatus.OrderSended:
+            navigate( 'WaitingConfirmation' );
+            break;
+          case OrderStatus.OrderConfirmed:
+            navigate( 'WaitingConfirmedOrder' );
+            break;
+          case OrderStatus.OrderRecived:
+            navigate( 'ClientConfirmation' );
+            break;
+          case OrderStatus.OrderRecivedConfirmed:
+            setTimeout(() => {
+              navigate( 'ClientEating' );
+            }, 3000 );
+            break;
+          case OrderStatus.ClientEating:
+            navigate( 'ClientEating' );
+            break;
+          case OrderStatus.WaitingCheck:
+            navigate( 'WaitingCheck' );
+            break;
+          default:
+            break;
+        }
+      } else {
+        navigate( active );
+      }
+      Toast.show({
+        type: 'success',
+        text1: 'Mesa scaneada correctamente',
+        position: 'bottom'
+      });
+    } else {
+      setScanner( false );
+      setActive( '' );
+      Toast.show({
+        type: 'error',
+        text1: 'La mesa scaneada no es la asignada',
+        position: 'bottom'
+      });
     }
   };
+  const handleChat = () => {
+    navigate( 'ClientChat' );
+  };
   return (
-    <Tab.Navigator
-      initialRouteName='Pedido'
-      screenOptions={
-        ({ route }) => ({
-          tabBarIcon: ({ size }) => renderTabBarIcon( route, size ),
-          headerStyle: {
-            backgroundColor: theme.colors.primary,
-            borderBottomWidth: 2
-          },
-          headerShown: false,
-          tabBarActiveTintColor: theme.colors.primary,
-          tabBarInactiveTintColor: theme.colors.neutral
-        })
-      }
-    >
-      <Tab.Screen
-        name='Juegos'
-        component={GameTab}
-        options={{
-          headerStyle: {
-            backgroundColor: theme.colors.primary,
-            borderBottomWidth: 2,
-            borderBottomColor: theme.colors.neutral
-          },
-          headerShown: false,
-          tabBarActiveTintColor: theme.colors.text,
-          tabBarInactiveTintColor: theme.colors.neutral
-        }}
-      />
-      <Tab.Screen
-        name='Pedido'
-        component={renderTabPedidos()}
-        initialParams={{ displayFormOnType: UserTypes.None }}
-        options={{
-          headerStyle: {
-            backgroundColor: theme.colors.primary,
-            borderBottomWidth: 2,
-            borderBottomColor: theme.colors.neutral
-          },
-          headerShown: false,
-          tabBarActiveTintColor: theme.colors.text,
-          tabBarInactiveTintColor: theme.colors.neutral
-        }}
-      />
-      <Tab.Screen
-        name='Encuestas'
-        component={SurveysTab}
-        initialParams={{ displayFormOnType: UserTypes.None }}
-        options={{
-          headerStyle: {
-            backgroundColor: theme.colors.primary,
-            borderBottomWidth: 2,
-            borderBottomColor: theme.colors.neutral
-          },
-          tabBarActiveTintColor: theme.colors.text,
-          tabBarInactiveTintColor: theme.colors.neutral
-        }}
-      />
-    </Tab.Navigator>
+    <View>
+      { scanner ? (
+        <View>
+          <Scanner onScan={( result ) => handleScannerResult( result )} />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => onGameScreen()}
+          >
+            <Icon name='gamepad' size={50} color='white' />
+            <Text style={styles.textButton}>Juegos</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => onSurveyScreen()}
+          >
+            <IconMaterial name='message-star' size={50} color='white' />
+            <Text style={styles.textButton}>Encuestas</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => onOrderScreen()}
+          >
+            <Icon name='concierge-bell' size={50} color='white' />
+            <Text style={styles.textButton}>Pedido</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleChat} style={styles.containerChatIconTouchable}>
+            <View style={styles.containerChatIcon}>
+              <ChatIcon name='chatbubbles-outline' style={styles.chatIcon} size={40} color='white' />
+            </View>
+          </TouchableOpacity>
+        </View>
+      )}
+
+    </View>
+
   );
 }
 

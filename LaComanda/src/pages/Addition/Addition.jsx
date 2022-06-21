@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useContext } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Styles from './styles';
 import UserForm from '../../components/UserForm/UserForm';
 import { UserTypes } from '../../util/Enums';
@@ -11,6 +12,9 @@ import CreateTable from '../CreateTable/CreateTable';
 import theme from '../../config/theme';
 import CreateProduct from '../CreateProduct/CreateProduct';
 import GlobalContext from '../../context/GlobalContext';
+import { createUserWithEmailAndPassword } from '../../services/AuthService';
+import { saveImageInStorage } from '../../services/StorageServices';
+import { saveItemInCollection } from '../../services/FirestoreServices';
 
 export default function Addition() {
   const [userTypeForm, setUserTypeForm] = useState( UserTypes.None );
@@ -22,18 +26,31 @@ export default function Addition() {
   };
 
   const registerUser = ( newUser ) => {
-    createUserWithEmailAndPassword( newUser.email, newUser.password ).then(( user ) => {
-      createBlob( newUser.photo ).then(( blob ) => {
-        saveImageInStorage( user.user.uid, blob ).then(( uri ) => {
-          newUser.photo = uri;
-          saveItemInCollection( 'users', user.user.uid, newUser );
-        })
-          .catch(( error ) => console.log( error ));
-      }).catch(( error ) => { console.log( error ); });
-    }).then(() => {
-      signOutUser();
-      navigation.navigate( 'Ingresar' );
-    });
+    try {
+      createUserWithEmailAndPassword( newUser.email, newUser.password ).then(( user ) => {
+        createBlob( newUser.photo ).then(( blob ) => {
+          saveImageInStorage( user.user.uid, blob ).then(( uri ) => {
+            newUser.photo = uri;
+            saveItemInCollection( 'users', user.user.uid, newUser ).then(() => {
+              Toast.show({
+                type: 'success',
+                text1: 'Se ha creado el usuario del Empleado correctamente',
+                position: 'bottom'
+              });
+            });
+          })
+            .catch(( error ) => { throw error; });
+        }).catch(( error ) => { throw error; });
+      }).then(() => {
+        navigation.navigate( 'Home' );
+      });
+    } catch ( error ) {
+      Toast.show({
+        type: 'error',
+        text1: error,
+        position: 'bottom'
+      });
+    }
   };
 
   async function createBlob( photoUri ) {

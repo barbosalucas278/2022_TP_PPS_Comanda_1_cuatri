@@ -9,6 +9,7 @@ import ItemProductStatus from '../../../../components/ItemProductStatus/ItemProd
 import Scanner from '../../../../components/Scanner/Scanner';
 import { updateItem } from '../../../../services/FirestoreServices';
 import { OrderStatus } from '../../../../util/Enums';
+import { navigate } from '../../../../config/RootNavigation';
 
 export default function ClientEating() {
   const { client } = useContext( GlobalContext );
@@ -25,6 +26,7 @@ export default function ClientEating() {
 
   const getTheCheck = () => {
     updateItem( 'clients', client.email, { totalToPaid: totalNow, tip: propina, orderState: OrderStatus.WaitingCheck });
+    navigate( 'TableMenu', { dontRedirect: false });
   };
   const handleScannerResult = ( scannerResult ) => {
     if ( scannerResult === client.assignedTable ) {

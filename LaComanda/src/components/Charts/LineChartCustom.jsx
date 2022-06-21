@@ -14,6 +14,7 @@ export function LineChartCustom( props ) {
         width={Dimensions.get( 'window' ).width - 16}
         height={220}
         chartConfig={{
+          fromZero: true,
           backgroundColor: '#1cc910',
           backgroundGradientFrom: '#eff3ff',
           backgroundGradientTo: '#efefef',

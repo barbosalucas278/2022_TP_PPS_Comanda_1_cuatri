@@ -13,6 +13,7 @@ import React, {
 } from 'react';
 import * as Notifications from 'expo-notifications';
 import { useNavigation } from '@react-navigation/native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { styles } from './styles';
 import GlobalContext from '../../../context/GlobalContext';
 import { handleLoginErrorMessage } from './utils';
@@ -49,14 +50,32 @@ function LoginTab() {
               password: respuesta.password
             });
           } else {
-            setErrorMessage( 'Su usuario todavía no fué aprobado' );
+            Toast.show({
+              type: 'error',
+              text1: 'Su usuario todavía no fué aprobado',
+              position: 'bottom'
+            });
             setError( true );
             setLoading( false );
           }
         } else {
-          setError( 'Usuario no encontrado' );
+          Toast.show({
+            type: 'error',
+            text1: 'Usuario no encontrado',
+            position: 'bottom'
+          });
+          setError( true );
+          setLoading( false );
         }
-      }, ( err ) => { console.log( err ); });
+      }, ( err ) => {
+        Toast.show({
+          type: 'error',
+          text1: err,
+          position: 'bottom'
+        });
+        setError( true );
+        setLoading( false );
+      });
       setTimeout(() => {
         signIn( email, password );
       }, 5000 );
@@ -92,18 +111,22 @@ function LoginTab() {
   };
 
   const registerForPushNotificationAsync = async ( user ) => {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if ( existingStatus !== 'granted' ) {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
+    try {
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if ( existingStatus !== 'granted' ) {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if ( finalStatus !== 'granted' ) {
+        console.log( 'Failed to get push token for push notification!' );
+        return;
+      }
+      const token = ( await Notifications.getExpoPushTokenAsync()).data;
+      updateItem( 'users', user.user.uid, { pushToken: token });
+    } catch ( err ) {
+      console.log( err );
     }
-    if ( finalStatus !== 'granted' ) {
-      console.log( 'Failed to get push token for push notification!' );
-      return;
-    }
-    const token = ( await Notifications.getExpoPushTokenAsync()).data;
-    updateItem( 'users', user.user.uid, { pushToken: token });
   };
 
   return (
@@ -151,7 +174,7 @@ function LoginTab() {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setEmail( 'Invitado5@invitado.com' );
+              setEmail( 'Barbosalucasroberto@gmail.com' );
               setPassword( '12345678' );
             }}
             style={{}}

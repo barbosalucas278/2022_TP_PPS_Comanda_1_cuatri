@@ -5,7 +5,6 @@ import {
   FlatList, Text, View, TouchableOpacity, ActivityIndicator
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import ChatIcon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import ProductItem from '../ProductItem/ProductItem';
 import GlobalContext from '../../../../context/GlobalContext';
@@ -92,10 +91,6 @@ export default function ProductsList({ navigation }) {
     });
   };
 
-  const handleChat = () => {
-    navigation.navigate( 'ClientChat' );
-  };
-
   return (
     <View style={styles.container}>
       {
@@ -139,11 +134,7 @@ export default function ProductsList({ navigation }) {
           </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleChat}>
-        <View style={styles.containerChatIcon}>
-          <ChatIcon name='chatbubbles-outline' style={styles.chatIcon} size={40} color='white' />
-        </View>
-      </TouchableOpacity>
+
     </View>
   );
 }

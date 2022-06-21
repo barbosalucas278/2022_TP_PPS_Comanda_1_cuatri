@@ -6,22 +6,24 @@ const styles = StyleSheet.create({
     height: Dimensions.get( 'screen' ).height * 0.63
   },
   containerList: {
-    height: Dimensions.get( 'screen' ).height * 0.7
+    height: Dimensions.get( 'screen' ).height * 0.78
   },
   estimatedTimeText: {
     textAlign: 'center',
     fontSize: 23
   },
   containerOrderButton: {
-    width: '70%',
+    width: '100%',
     height: '20%',
     position: 'absolute',
     bottom: 0,
     justifyContent: 'flex-end',
-    marginBottom: -Dimensions.get( 'screen' ).height * 0.16
+    alignItems: 'center',
+    marginBottom: -Dimensions.get( 'screen' ).height * 0.23
   },
   orderButton: {
     paddingVertical: 15,
+    paddingHorizontal: 60,
     backgroundColor: theme.colors.success,
     marginBottom: 10,
     marginLeft: 10,
@@ -38,16 +40,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     marginRight: 15
-  },
-  containerChatIcon: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 50,
-    padding: 10,
-    marginBottom: -70,
-    marginRight: 10
   }
 });
 export default styles;
