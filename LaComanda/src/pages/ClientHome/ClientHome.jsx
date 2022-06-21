@@ -1,4 +1,6 @@
-import { View, Text, ActivityIndicator } from 'react-native';
+import {
+  View, Text, ActivityIndicator, Vibration
+} from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
@@ -45,6 +47,7 @@ export default function ClientHome() {
           text1: 'No es la mesa asignada',
           position: 'bottom'
         });
+        Vibration.vibrate( 1000 );
         setSpinner( false );
       }, 1000 );
     }

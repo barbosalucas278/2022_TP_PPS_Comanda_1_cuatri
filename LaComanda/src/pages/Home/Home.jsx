@@ -1,7 +1,10 @@
-import { View, TouchableOpacity, Text } from 'react-native';
+import {
+  View, TouchableOpacity, Text, Vibration
+} from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import * as Notifications from 'expo-notifications';
 import { useNavigation } from '@react-navigation/native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import Fab from '../../components/Fab/Fab';
 import GlobalContext from '../../context/GlobalContext';
@@ -140,10 +143,16 @@ export default function Home() {
           sendPushNotification( usersToken, 'Nuevo Ingreso', 'Ha ingresado un cliente a la lista de espera' );
         }, ( err ) => { console.log( err ); });
       });
-      console.log( client );
       setTimeout(() => {
         navigation.navigate( 'ClientsHome' );
       }, 2000 );
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: 'El Qr es inválido',
+        position: 'bottom'
+      });
+      Vibration.vibrate( 1000 );
     }
   };
 

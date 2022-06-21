@@ -6,7 +6,8 @@ import {
   View,
   Image,
   ActivityIndicator,
-  Keyboard
+  Keyboard,
+  Vibration
 } from 'react-native';
 import React, {
   useContext, useState, useEffect
@@ -55,6 +56,7 @@ function LoginTab() {
               text1: 'Su usuario todavía no fué aprobado',
               position: 'bottom'
             });
+            Vibration.vibrate( 1000 );
             setError( true );
             setLoading( false );
           }
@@ -64,6 +66,8 @@ function LoginTab() {
             text1: 'Usuario no encontrado',
             position: 'bottom'
           });
+          Vibration.vibrate( 1000 );
+
           setError( true );
           setLoading( false );
         }
@@ -73,6 +77,8 @@ function LoginTab() {
           text1: err,
           position: 'bottom'
         });
+        Vibration.vibrate( 1000 );
+
         setError( true );
         setLoading( false );
       });

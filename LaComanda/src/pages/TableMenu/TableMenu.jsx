@@ -2,7 +2,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Text, TouchableOpacity, View } from 'react-native';
+import {
+  Text, TouchableOpacity, Vibration, View
+} from 'react-native';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import ChatIcon from 'react-native-vector-icons/Ionicons';
 import { OrderStatus } from '../../util/Enums';
@@ -16,35 +18,37 @@ export default function TableMenu() {
   const [scanner, setScanner] = useState( false );
   const [active, setActive] = useState( '' );
   useEffect(() => {
-    switch ( client.orderState ) {
-      case OrderStatus.ScannedAssignedTable:
-        navigate( 'ProductsList' );
-        break;
-      case OrderStatus.OrderSended:
-        navigate( 'WaitingConfirmation' );
-        break;
-      case OrderStatus.OrderConfirmed:
-        navigate( 'WaitingConfirmedOrder' );
-        break;
-      case OrderStatus.OrderRecived:
-        navigate( 'ClientConfirmation' );
-        break;
-      case OrderStatus.OrderRecivedConfirmed:
-        setTimeout(() => {
+    if ( active ) {
+      switch ( client.orderState ) {
+        case OrderStatus.ScannedAssignedTable:
+          navigate( 'ProductsList' );
+          break;
+        case OrderStatus.OrderSended:
+          navigate( 'WaitingConfirmation' );
+          break;
+        case OrderStatus.OrderConfirmed:
+          navigate( 'WaitingConfirmedOrder' );
+          break;
+        case OrderStatus.OrderRecived:
+          navigate( 'ClientConfirmation' );
+          break;
+        case OrderStatus.OrderRecivedConfirmed:
+          setTimeout(() => {
+            navigate( 'ClientEating' );
+          }, 3000 );
+          break;
+        case OrderStatus.ClientEating:
           navigate( 'ClientEating' );
-        }, 3000 );
-        break;
-      case OrderStatus.ClientEating:
-        navigate( 'ClientEating' );
-        break;
-      case OrderStatus.WaitingCheck:
-        navigate( 'WaitingCheck' );
-        break;
-      case OrderStatus.FinishedProcess:
-        navigate( 'Home' );
-        break;
-      default:
-        break;
+          break;
+        case OrderStatus.WaitingCheck:
+          navigate( 'WaitingCheck' );
+          break;
+        case OrderStatus.FinishedProcess:
+          navigate( 'Home' );
+          break;
+        default:
+          break;
+      }
     }
   }, [client.orderState]);
 
@@ -108,6 +112,7 @@ export default function TableMenu() {
         text1: 'La mesa scaneada no es la asignada',
         position: 'bottom'
       });
+      Vibration.vibrate( 1000 );
     }
   };
   const handleChat = () => {

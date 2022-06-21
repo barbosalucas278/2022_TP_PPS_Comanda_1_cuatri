@@ -1,7 +1,10 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import {
   Text, View, Image, ImageBackground, ScrollView, Dimensions, TouchableOpacity
 } from 'react-native';
 import React, { useContext } from 'react';
+import { Audio } from 'expo-av';
 import styles from './styles';
 import Clocheimg from '../../../../../assets/cloche.png';
 import CheckImg from '../../../../../assets/check.gif';
@@ -11,9 +14,22 @@ import ItemProductStatus from '../../../../components/ItemProductStatus/ItemProd
 import { OrderStatus } from '../../../../util/Enums';
 import { updateItem } from '../../../../services/FirestoreServices';
 
+const soundMp3 = require( '../../../../../assets/sounds/checkSound.mp3' );
+
 export default function ClientConfirmation() {
   const { client } = useContext( GlobalContext );
-  const confirmOrderRecived = () => {
+  async function playSound() {
+    try {
+      const sound = new Audio.Sound();
+      await sound.loadAsync( soundMp3 );
+      sound.playAsync();
+      // sound.unloadAsync();
+    } catch ( error ) {
+      console.log( error );
+    }
+  }
+  const confirmOrderRecived = async () => {
+    playSound();
     updateItem( 'clients', client.email, { orderState: OrderStatus.OrderRecivedConfirmed });
     setTimeout(() => {
       updateItem( 'clients', client.email, { orderState: OrderStatus.ClientEating });

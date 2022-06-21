@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
-import { Text, View, TouchableOpacity } from 'react-native';
+import {
+  Text, View, TouchableOpacity, Vibration
+} from 'react-native';
 import React, { useState, useContext } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -50,6 +52,7 @@ export default function Addition() {
         text1: error,
         position: 'bottom'
       });
+      Vibration.vibrate( 1000 );
     }
   };
 

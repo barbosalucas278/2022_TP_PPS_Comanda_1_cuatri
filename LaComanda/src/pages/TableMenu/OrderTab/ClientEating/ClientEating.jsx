@@ -1,5 +1,5 @@
 import {
-  Text, TouchableOpacity, View, TextInput
+  Text, TouchableOpacity, View, TextInput, Vibration
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
@@ -38,6 +38,7 @@ export default function ClientEating() {
         text1: 'Mesa scanneada es invalida',
         position: 'bottom'
       });
+      Vibration.vibrate( 1000 );
     }
   };
 
