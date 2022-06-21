@@ -28,6 +28,7 @@ import ClientChat from '../../pages/TableMenu/OrderTab/ClientChat/ClientChat';
 import ClientConfirmation from '../../pages/TableMenu/OrderTab/ClientConfirmation/ClientConfirmation';
 import ClientEating from '../../pages/TableMenu/OrderTab/ClientEating/ClientEating';
 import WaitingCheck from '../../pages/TableMenu/OrderTab/WaitingCheck/WaitingCheck';
+import CookBarmanOrderView from '../../pages/CookBarmanOrderView/CookBarmanOrderView';
 
 const Stack = createNativeStackNavigator();
 const configToast = createConfiguracionToast();

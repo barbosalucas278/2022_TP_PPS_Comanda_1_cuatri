@@ -76,8 +76,10 @@ export const styles = StyleSheet.create({
     width: Dimensions.get( 'screen' ).width
   },
   clientCard: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: Dimensions.get( 'screen' ).width * 0.95,
-    height: Dimensions.get( 'screen' ).height * 0.35,
+    height: Dimensions.get( 'screen' ).height * 0.4,
     borderRadius: 10,
     borderWidth: 3,
     borderColor: theme.colors.primary,
@@ -108,6 +110,17 @@ export const styles = StyleSheet.create({
     color: theme.colors.secondary,
     fontWeight: '700',
     fontSize: 24
+  },
+  formControlPhoto: {
+    borderColor: theme.colors.primary,
+    width: Dimensions.get( 'screen' ).width * 0.7,
+    height: Dimensions.get( 'screen' ).height * 0.2,
+    borderRadius: 10,
+    borderWidth: 4
+  },
+  formControlPhotoWithPhoto: {
+    width: Dimensions.get( 'screen' ).width * 0.68,
+    height: Dimensions.get( 'screen' ).height * 0.191
   },
   icon: {
     fontSize: 28,

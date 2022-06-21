@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { styles } from './styles';
 import { getAllClientsToOrder, getAllCooksAndBartenders, updateItem } from '../../services/FirestoreServices';
 import { sendPushNotification } from '../../services/PushNotificationService';
+import ItemProductStatus from '../../components/ItemProductStatus/ItemProductStatus';
 
 export default function WaiterOrderView() {
   const [usefulClients, setUsefulClients] = useState([{}]);
@@ -36,14 +37,16 @@ export default function WaiterOrderView() {
 
 function ClientCard( props ) {
   const {
-    data, id
+    data
   } = props;
   const [messageKitchen, setMessageKitchen] = useState( '' );
   const [messageBar, setMessageBar] = useState( '' );
   const [buttonType, setButtonType] = useState( 'Confirmar Pedido' );
+  const [products, setProducts] = useState([{}]);
 
   useEffect(() => {
     if ( data && data.order && data.order.products ) {
+      setProducts( data.order.products );
       const cocina = data.order.products.filter(( p ) => p.sector === 'Cocina' );
       const pendienteC = cocina.filter(( p ) => p.productState === '1' );
       const preparacionC = cocina.filter(( p ) => p.productState === '2' );
@@ -117,6 +120,11 @@ function ClientCard( props ) {
         <Text style={styles.textName}>{`Cliente: ${data.name}`}</Text>
         <Text style={styles.textName}>{`Cocina: ${messageKitchen}`}</Text>
         <Text style={styles.textName}>{`Bar: ${messageBar}`}</Text>
+        <View style={styles.containerListOfItemsProduct}>
+          {products.map(( product ) => (
+            <ItemProductStatus product={product} withStatus />
+          ))}
+        </View>
       </View>
       {( buttonType === 'Confirmar Pedido' || buttonType === 'Entregar Pedido' )
         ? (

@@ -66,6 +66,10 @@ export const getAllCooksAndBartenders = async ( onResult, onError ) => {
   await firestore.collection( 'users' ).where( 'rol', 'in', ['Bartender', 'Cocinero']).where( 'approved', '==', true ).onSnapshot( onResult, onError );
 };
 
+export const getClientsWithProductsToPrepare = async ( onResult, onError ) => {
+  await firestore.collection( 'clients' ).where( 'orderState', '==', '5' ).onSnapshot( onResult, onError );
+};
+
 export const getAllClients = async ( onResult, onError ) => {
   await firestore.collection( 'clients' ).onSnapshot( onResult, onError );
 };

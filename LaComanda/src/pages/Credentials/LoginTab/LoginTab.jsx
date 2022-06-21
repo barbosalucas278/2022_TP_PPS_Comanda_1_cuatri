@@ -153,7 +153,7 @@ function LoginTab() {
           />
 
           <TextInput
-            placeholder='Email'
+            placeholder='Mail'
             placeholderTextColor='black'
             style={styles.input}
             value={email}
@@ -180,10 +180,9 @@ function LoginTab() {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setEmail( 'Barbosalucasroberto@gmail.com' );
+              setEmail( 'guido@clas.com.ar' );
               setPassword( '12345678' );
             }}
-            style={{}}
           >
             <Text>Rapido</Text>
           </TouchableOpacity>

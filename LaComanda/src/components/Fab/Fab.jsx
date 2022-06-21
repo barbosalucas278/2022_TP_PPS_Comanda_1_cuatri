@@ -176,6 +176,23 @@ export default function Fab( props ) {
             >
               <MaterialCommunityIcons name='check-decagram' size={40} color='white' />
             </ActionButton.Item>
+            <ActionButton.Item
+              spaceBetween={2}
+              buttonColor={theme.colors.icons}
+              useNativeFeedback
+              title='Pedidos'
+              textStyle={{
+                fontSize: 14,
+                width: 112,
+                height: 100
+              }}
+              style={{ zIndex: 9999 }}
+              onPress={() => {
+                navigation.navigate( 'CookBarmanOrderView' );
+              }}
+            >
+              <MaterialCommunityIcons name='format-list-checks' size={40} color='white' />
+            </ActionButton.Item>
           </ActionButton>
         );
       default:
