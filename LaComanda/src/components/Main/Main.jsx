@@ -19,6 +19,7 @@ import TableMenu from '../../pages/TableMenu/TableMenu';
 import WaiterChat from '../../pages/WaiterChat/WaiterChat';
 import WaiterOrderView from '../../pages/WaiterOrderView/WaiterOrderView';
 import { createConfiguracionToast } from '../../config/configToast';
+import CookBarmanOrderView from '../../pages/CookBarmanOrderView/CookBarmanOrderView';
 
 const Stack = createNativeStackNavigator();
 const configToast = createConfiguracionToast();
@@ -226,6 +227,26 @@ export default function Main() {
             }}
             name='WaiterOrderView'
             component={WaiterOrderView}
+          />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderProfileIcon(),
+              headerShown: true,
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Pedidos'
+            }}
+            name='CookBarmanOrderView'
+            component={CookBarmanOrderView}
           />
         </Stack.Navigator>
       </NavigationContainer>
