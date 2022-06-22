@@ -21,7 +21,8 @@ Mínimo: 2 integrantes
 - Vista de realización de Pedidos de Cliente [Completada]
 - Chat ida y vuelta entre Mozo/Cliente [Completada]
 - Vista de encuestas [Completada]
-- Vista de juegos [En proceso]
+- Vista de juegos [Completado]
+- Juego 10% de descuento [Completado]
 - Funcionalidad "Pedir la cuenta" [Completada]
 - Toasts [Completada]
 
@@ -35,6 +36,6 @@ Mínimo: 2 integrantes
 - Aceptación de Cliente por Metre [Completada]
 - Asignación de mesa por Metre [Completada]
 - Vista de confirmación y entrega de pedido [Completada]
-- Vista de pedidos pendientes para Cocinero/Bartender [En proceso]
-- Funcionalidad "Confirmar el pago" por mozo [En proceso]
-- Sonidos
+- Vista de pedidos pendientes para Cocinero/Bartender [Completado]
+- Funcionalidad "Confirmar el pago" por mozo [Completado]
+- Sonidos [Compleado]
