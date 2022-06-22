@@ -61,6 +61,10 @@ function ClientCard( props ) {
         setButtonType( 'Pedido en preparación' );
       }
 
+      if ( data.orderState === '9' ) {
+        setButtonType( 'Cobrar' );
+      }
+
       if ( listoC.length === cocina.length && listoB.length === bar.length ) {
         setButtonType( 'Entregar Pedido' );
       }
@@ -107,9 +111,11 @@ function ClientCard( props ) {
         const usersToken = response.map(( u ) => u.pushToken ).filter(( us ) => us !== undefined );
         sendPushNotification( usersToken, 'Nuevo Pedido', 'Hay un pedido pendiente' );
       }, ( err ) => { console.log( err ); });
-      sendPushNotification();
     } else if ( buttonType === 'Entregar Pedido' ) {
       updateItem( 'clients', data.email, { orderState: '6' });
+    } else if ( buttonType === 'Cobrar' ) {
+      updateItem( 'clients', data.email, { orderState: '10' });
+      updateItem( 'tables', data.assignedTable, { tableState: '1' });
     }
   };
 

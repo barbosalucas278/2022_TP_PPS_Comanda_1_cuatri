@@ -75,7 +75,7 @@ export const getAllClients = async ( onResult, onError ) => {
 };
 
 export const getAllClientsToOrder = async ( onResult, onError ) => {
-  await firestore.collection( 'clients' ).where( 'orderState', 'in', ['4', '5']).onSnapshot( onResult, onError );
+  await firestore.collection( 'clients' ).where( 'orderState', 'in', ['4', '5', '9']).onSnapshot( onResult, onError );
 };
 
 export const getClientByEmail = async ( email, onResult, onError ) => {
