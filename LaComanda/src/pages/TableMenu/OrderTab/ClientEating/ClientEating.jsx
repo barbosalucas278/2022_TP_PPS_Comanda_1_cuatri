@@ -19,10 +19,10 @@ export default function ClientEating() {
   const [totalNow, setTotalNow] = useState( 0 );
   useEffect(() => {
     setTotalNow( client.order.total );
-    if ( client.order.discount ) {
-      setTotalNow( client.order.total - ( client.order.total * ( client.order.discount / 100 )));
+    if ( client.discount ) {
+      setTotalNow( client.order.total - ( client.order.total * ( client.discount / 100 )));
     }
-  }, [client.order.discount]);
+  }, [client.discount]);
 
   const getTheCheck = () => {
     updateItem( 'clients', client.email, { totalToPaid: totalNow, tip: propina, orderState: OrderStatus.WaitingCheck });
@@ -57,10 +57,10 @@ export default function ClientEating() {
               Subtotal: $
               {client.order.total}
             </Text>
-            {client.order.discount > 0 && (
+            {client.discount > 0 && (
               <Text style={[styles.text, { fontWeight: 'bold', marginTop: 5 }]}>
                 Descuento: %
-                {client.order.discount}
+                {client.discount}
               </Text>
             )}
             {showPropina

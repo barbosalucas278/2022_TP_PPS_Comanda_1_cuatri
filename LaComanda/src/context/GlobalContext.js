@@ -6,7 +6,17 @@ const GlobalContext = createContext({
   },
   setUser: () => {},
   client: {
-    name: '', surname: '', role: '', email: '', orderState: '', assignedTable: '', photo: '', order: {}, surveysDone: false
+    name: '',
+    surname: '',
+    role: '',
+    email: '',
+    orderState: '',
+    assignedTable: '',
+    photo: '',
+    order: {},
+    surveysDone: false,
+    discount: 0,
+    gameover: false
   },
   setClient: () => {},
   clients: [],

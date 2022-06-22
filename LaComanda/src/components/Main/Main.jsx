@@ -440,6 +440,25 @@ export default function Main() {
             name='CookBarmanOrderView'
             component={CookBarmanOrderView}
           />
+          <Stack.Screen
+            options={{
+              headerLeft: () => renderHeaderTableMenu(),
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+                borderBottomWidth: 2,
+                borderBottomColor: theme.colors.neutral
+              },
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: theme.colors.secondary,
+                fontSize: 25,
+                fontWeight: '400'
+              },
+              headerTitle: 'Juegos'
+            }}
+            name='Game1'
+            component={CookBarmanOrderView}
+          />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast config={configToast} />

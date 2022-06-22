@@ -73,7 +73,14 @@ export default function Home() {
   }, [btnScannerText]);
 
   const mainAction = () => {
+    console.log( client.orderState );
+    if ( client.orderState === undefined ) {
+      setScanner( true );
+    }
     switch ( client.orderState ) {
+      case undefined:
+        setScanner( true );
+        break;
       case OrderStatus.WaitingList:
       case OrderStatus.WaitingForScanTable:
         navigation.navigate( 'ClientsHome' );
