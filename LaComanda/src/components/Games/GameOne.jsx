@@ -55,14 +55,14 @@ export default function GameOne( props ) {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Text>{num1}</Text>
+      <View style={styles.containerNumber}>
+        <Text style={styles.textNumber}>{num1}</Text>
       </View>
-      <View>
-        <Text>{operation}</Text>
+      <View style={styles.containerOperation}>
+        <Text style={styles.textOperation}>{operation}</Text>
       </View>
-      <View>
-        <Text>{num2}</Text>
+      <View style={styles.containerNumber}>
+        <Text style={styles.textNumber}>{num2}</Text>
       </View>
       <View>
         <Text style={styles.buttonText}>¿Cuánto es?</Text>

@@ -39,6 +39,28 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginLeft: 45,
     marginTop: 35
+  },
+  containerNumber: {
+    height: Dimensions.get( 'screen' ).height * 0.1,
+    width: Dimensions.get( 'screen' ).width * 0.6,
+    borderWidth: 2,
+    borderColor: theme.colors.primary,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  containerOperation: {
+    hheight: Dimensions.get( 'screen' ).height * 0.3,
+    width: Dimensions.get( 'screen' ).width * 0.6,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  textNumber: {
+    color: 'white',
+    fontSize: 45
+  },
+  textOperation: {
+    fontSize: 60
   }
 });
 export default styles;
